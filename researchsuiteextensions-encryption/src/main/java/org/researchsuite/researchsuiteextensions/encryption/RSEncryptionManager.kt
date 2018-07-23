@@ -6,8 +6,15 @@ import com.google.crypto.tink.aead.AeadConfig
 import com.google.crypto.tink.aead.AeadKeyTemplates
 import com.google.crypto.tink.integration.android.AndroidKeysetManager
 import com.google.crypto.tink.proto.KeyTemplate
+import com.google.crypto.tink.subtle.Random
 
 class RSEncryptionManager(val masterKeyID: String, val context: Context, val preferencesID: String) {
+
+    companion object {
+        fun generateKeyMaterial(size: Int): ByteArray {
+            return Random.randBytes(size)
+        }
+    }
 
     val masterKeyUri = "android-keystore://$masterKeyID"
 

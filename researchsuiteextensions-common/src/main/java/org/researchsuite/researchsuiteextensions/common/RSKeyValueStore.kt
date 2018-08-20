@@ -4,7 +4,7 @@ import android.util.AtomicFile
 import java.io.*
 import java.security.GeneralSecurityException
 
-class RSKeyValueStore(val filePath: String, val objectConverter: RSObjectConverter<Map<String, Any>> = RSJavaObjectConverter()) {
+open class RSKeyValueStore(val filePath: String, val objectConverter: RSObjectConverter<Map<String, Any>> = RSJavaObjectConverter()) {
 
     var currentMap: Map<String, Any>? = null
 
@@ -75,8 +75,14 @@ class RSKeyValueStore(val filePath: String, val objectConverter: RSObjectConvert
     }
 
     //set
-    fun set(key: String, value: Any) {
-        this.saveMap(this.getMap().plus(Pair(key, value)))
+    fun set(key: String, value: Any?) {
+
+        if (value == null) {
+            this.saveMap(this.getMap().minus(key))
+        }
+        else {
+            this.saveMap(this.getMap().plus(Pair(key, value)))
+        }
     }
 
     //has

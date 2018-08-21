@@ -1,1 +1,1 @@
-include ':app', ':researchsuiteextensions-encryption', ':researchsuiteextensions-common'
+include ':app', ':researchsuiteextensions-encryption', ':researchsuiteextensions-common', ':researchsuiteextensions-predicate'
